@@ -1,4 +1,4 @@
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1ApTl2C0qpKmtfzAkE8H1yriqr_iifvo&libraries=places&callback=initAutocomplete" async defer></script>
+
 
 
 function calcular_distancia(latitud1,latitud2,longitud1,longitud2) {
