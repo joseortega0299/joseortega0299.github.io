@@ -3,13 +3,13 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <!-- link to main stylesheet -->
+		<link rel="stylesheet" type="text/css" href="/css/main.css">
     <div id="Titulo">
       <h1>Map my Trip (MMT)</h1>
     </div>
     <style>
       
-
       #map {
         position: absolute;
         top: 300px;
@@ -18,7 +18,6 @@
         margin: 0;
         padding: 0;
       }
-
       
       .controls {
         margin-top: 10px;
@@ -30,7 +29,6 @@
         outline: none;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
       }
-
       #pac-input {
         background-color: #fff;
         font-family: Roboto;
@@ -41,21 +39,17 @@
         text-overflow: ellipsis;
         width: 300px;
       }
-
       #pac-input:focus {
         border-color: #4d90fe;
       }
-
       .pac-container {
         font-family: Roboto;
       }
-
       #type-selector {
         color: #fff;
         background-color: #4d90fe;
         padding: 5px 11px 0px 11px;
       }
-
       #type-selector label {
         font-family: Roboto;
         font-size: 13px;
@@ -74,7 +68,6 @@
     <div id="map"></div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1ApTl2C0qpKmtfzAkE8H1yriqr_iifvo&libraries=places&callback=initAutocomplete" async defer></script>
     <script async src="./javascript/index.js"></script>
-
     <div id="FormularioAgregar">
       <lblAgregarV>Agregar Viaje</lblAgregarV>
       <Fechas>
