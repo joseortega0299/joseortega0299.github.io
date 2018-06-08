@@ -1,5 +1,15 @@
 
 
+var array_viajes = [];
+var array_ciudades = [];
+var array_paises = [];
+var array_distancias_kms = [];
+
+var LatLong;
+
+function calcular_mate(x) {
+  return x * Math.PI / 180;
+}
 
 function calcular_distancia(latitud1,latitud2,longitud1,longitud2) {
   var R = 6378137; // Earth’s mean calcular_mateius in meter
