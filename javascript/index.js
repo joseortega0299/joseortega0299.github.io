@@ -589,60 +589,47 @@ function largo(){
 }
 
 function genera_tabla() {
-  // Obtener la referencia del elemento body
-  var body = document.getElementsByTagName("body")[0];
 
-  // Crea un elemento <table> y un elemento <tbody>
-  var tabla   = document.createElement("table");
-  var tblBody = document.createElement("tbody");
-  // Crea las celdas
-  for (var i = -1; i < array_viajes.length; i++) {
-    // Crea las hileras de la tabla
-    var hilera = document.createElement("tr");
+// Find a <table> element with id="myTable":
+var table = document.getElementById("MyTable");
+eliminar_filas();
 
-    if(i === -1){
-      var TextoNumero = document.createTextNode("#");
-      var TextoTags = document.createTextNode("Tags");
-      var TextoFechaLlegada = document.createTextNode("Fecha de Llegada");
-      var TextoInfoAdicional= document.createTextNode("Información Adicional");
-      var TextoLatitud = document.createTextNode("Latitud");
-      var TextoLongitud = document.createTextNode("Longitud");
-    }else{
-      var TextoNumero = document.createTextNode(i+1);
-      var TextoFechaLlegada = document.createTextNode(array_viajes[i].FechaLlegada);
-      var TextoTags = document.createTextNode(array_viajes[i].tags);
-      var TextoInfoAdicional= document.createTextNode(array_viajes[i].InfoAdicional);
-      var TextoLatitud = document.createTextNode(array_viajes[i].Latitud);
-      var TextoLongitud = document.createTextNode(array_viajes[i].Longitud);
-    }    
+  for (var i = 0; i < array_viajes.length; i++) {
+    var row = table.insertRow(-1);
 
-    var celda = document.createElement("td"); 
-    celda.appendChild(TextoNumero); 
-    hilera.appendChild(celda);
-    var celda2 = document.createElement("td");  
-    celda2.appendChild(TextoFechaLlegada);
-    hilera.appendChild(celda2);
-    var celda3 = document.createElement("td");  
-    celda3.appendChild(TextoTags);
-    hilera.appendChild(celda3);
-    var celda4 = document.createElement("td");  
-    celda4.appendChild(TextoInfoAdicional);
-    hilera.appendChild(celda4);
-    var celda5 = document.createElement("td");  
-    celda5.appendChild(TextoLatitud);
-    hilera.appendChild(celda5);
-    var celda6 = document.createElement("td");  
-    celda6.appendChild(TextoLongitud);
-    hilera.appendChild(celda6);
-    
-    // agrega la hilera al final de la tabla (al final del elemento tblbody)
-    tblBody.appendChild(hilera);
+    var celda = row.insertCell(0);
+    var celda2 = row.insertCell(1); 
+    var celda3 = row.insertCell(2);
+    var celda4 = row.insertCell(3);
+    var celda5 = row.insertCell(4);
+    var celda6 = row.insertCell(5);
+    var celda7 = row.insertCell(6);
+
+    celda.innerHTML = i+1;
+    celda2.innerHTML = "<input type =='text' name='fll' value ='"+array_viajes[i].FechaLlegada+"'</input>";
+    celda3.innerHTML = "<input type =='text' name = 'ta'value ='"+array_viajes[i].tags+"'</input>";
+    celda4.innerHTML = "<input type =='text' name = 'ia'value ='"+array_viajes[i].InfoAdicional+"'</input>";
+    celda5.innerHTML = array_viajes[i].Latitud;
+    celda6.innerHTML = array_viajes[i].Longitud;
+    celda7.innerHTML = '<button style="color:blue" class="editar" onclick="transformarEnEditable('+i+')">Editar</button>'
+
   }
- 
-  // posiciona el <tbody> debajo del elemento <table>
-  tabla.appendChild(tblBody);
-  // appends <table> into <body>
-  body.appendChild(tabla);
-  // modifica el atributo "border" de la tabla y lo fija a "2";
-  tabla.setAttribute("border", "2");
+}
+  function eliminar_filas() {
+
+  // Find a <table> element with id="myTable":
+  var table = document.getElementById("MyTable");
+    for (var i = table.rows.length-1; i > 0 ; i--) {
+      table.deleteRow(i); 
+    }
+  }
+
+  function transformarEnEditable(numero){
+
+  array_viajes[numero].FechaLlegada = document.getElementsByName("fll")[numero].value;
+  array_viajes[numero].tags = document.getElementsByName("ta")[numero].value;
+  array_viajes[numero].InfoAdicional = document.getElementsByName("ia")[numero].value;
+
+  alert("Se modifico  la informacion de la fila " +(numero+1) + "con exito " + document.getElementsByName("fll")[numero].value);
+
 }
