@@ -528,10 +528,35 @@ function FiltroFechas(){
   }
 }
 
+function diasTotales(){
+  var Fs=array_viajes[0].FechaSalida;
+  var Fl=array_viajes[0].FechaLlegada;
+  for (i=0;i<array_viajes.length;i++){
+    if (array_viajes[i].FechaSalida<Fs)Fs=array_viajes[i].FechaSalida;
+    if(array_viajes[i].FechaLlegada>Fl)Fl=array_viajes[i].FechaLlegada;
+    console.log(array_viajes[i].FechaSalida + "\n-------\n"+array_viajes[i].FechaLlegada);
+
+
+  }
+  var fechaSalida = new Date(Fs).getTime();
+  var fechaLlegada    = new Date(Fl).getTime();
+  var diff = fechaLlegada - fechaSalida;
+  return diff/(1000*60*60*24);
+}
+
+function kmTotales(){
+  var kmT=0;
+  for (j = 0; j < array_distancias_kms.length; j++){
+    kmT+=array_distancias_kms[j];
+  }
+  return kmT;
+}
+
 
 function popupestads(){
+  diasTotales();
   alert("Estadísticas" + "\n" + "Total de Viajes: " + array_viajes.length + "\n" +
-    "Total de Dias de Viaje: " + "\n" + "Total de Distancia: " + "\n" + "Cantidad de Ciudades Visitadas: " + array_ciudades.length
+    "Total de Dias de Viaje: " +diasTotales()+ "\n" + "Total de Distancia: " +kmTotales()+ "\n" + "Cantidad de Ciudades Visitadas: " + array_ciudades.length
     + "\n" + "Cantidad de Paises Visitados: " + array_paises.length);
 }
 
