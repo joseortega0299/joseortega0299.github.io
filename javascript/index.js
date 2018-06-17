@@ -588,6 +588,7 @@ function largo(){
   console.log(array_viajes.length);
 }
 
+//Copiar desde aqui
 function genera_tabla() {
 
 // Find a <table> element with id="myTable":
@@ -597,16 +598,18 @@ eliminar_filas();
   for (var i = 0; i < array_viajes.length; i++) {
     var row = table.insertRow(-1);
 
-    var celda = row.insertCell(0);
-    var celda2 = row.insertCell(1); 
-    var celda3 = row.insertCell(2);
-    var celda4 = row.insertCell(3);
-    var celda5 = row.insertCell(4);
-    var celda6 = row.insertCell(5);
-    var celda7 = row.insertCell(6);
+    var celda0 = row.insertCell(0);
+    var celda1 = row.insertCell(1);
+    var celda2 = row.insertCell(2); 
+    var celda3 = row.insertCell(3);
+    var celda4 = row.insertCell(4);
+    var celda5 = row.insertCell(5);
+    var celda6 = row.insertCell(6);
+    var celda7 = row.insertCell(7);
 
-    celda.innerHTML = i+1;
-    celda2.innerHTML = "<input type =='text' name='fll' value ='"+array_viajes[i].FechaLlegada+"'</input>";
+    celda0.innerHTML = i+1;
+    celda1.innerHTML = array_viajes[i].FechaSalida;
+    celda2.innerHTML = array_viajes[i].FechaLlegada;
     celda3.innerHTML = "<input type =='text' name = 'ta'value ='"+array_viajes[i].tags+"'</input>";
     celda4.innerHTML = "<input type =='text' name = 'ia'value ='"+array_viajes[i].InfoAdicional+"'</input>";
     celda5.innerHTML = array_viajes[i].Latitud;
@@ -626,10 +629,11 @@ eliminar_filas();
 
   function transformarEnEditable(numero){
 
-  array_viajes[numero].FechaLlegada = document.getElementsByName("fll")[numero].value;
   array_viajes[numero].tags = document.getElementsByName("ta")[numero].value;
   array_viajes[numero].InfoAdicional = document.getElementsByName("ia")[numero].value;
 
-  alert("Se modifico  la informacion de la fila " +(numero+1) + "con exito " + document.getElementsByName("fll")[numero].value);
+  alert("Se modifico  la informacion de la fila " +(numero+1) + " con exito");
 
 }
+
+//Dejar de copiar
