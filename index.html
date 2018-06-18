@@ -68,9 +68,6 @@
     <div id="map"></div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1ApTl2C0qpKmtfzAkE8H1yriqr_iifvo&libraries=places&callback=initAutocomplete" async defer></script>
     <script async src="./javascript/index.js"></script>
-	  <btn>
-      <input type="button" value="Genera una tabla" onclick="genera_tabla()">
-      </btn>
     <div id="FormularioAgregar">
       <lblAgregarV>Agregar Viaje</lblAgregarV>
       <Fechas>
@@ -91,30 +88,6 @@
         </btn>
       </BGuardar>
      </div>
-	  
-	  <!-- Copiar desde aqui -->
-        <div id="DIVTable">
-          <style>
-            table, th, td {
-              border: 1px solid black;
-              border-collapse: collapse;
-            }
-          </style>
-        <table id="MyTable">
-          <tr>
-            <td><strong>#</strong></td>
-            <td><strong>Fecha de Salida</strong></td>
-            <td><strong>Fecha de Llegada</strong></td>
-            <td><strong>Tags</strong></td>
-            <td><strong>Información Adicional</strong></td>
-            <td><strong>Latitud</strong></td>
-            <td><strong>Longitud</strong></td>
-            <td><strong>Opciones</strong></td>
-          </tr>
-        </table>
-      </div>
-      <!-- Dejar de copiar -->
-    
 
     <div id=MostrarMapaPrincipal>
       Mostrar mapa principal
@@ -163,6 +136,25 @@
         <button onclick="FiltroFechas()" style='background:url("btnFFecha.jpg")'></button>
       </btn>
 	
+    </div>
+    <div id="DIVTable">
+      <h2>Información de los viajes.</h2>
+      <btn>
+        <button type="button" onclick="genera_tabla()" style='background:url("btnMostrarViajes.jpg")'></button>
+      </btn>
+      <table id="MyTable">
+        <tr>
+          <td style="width: 5px"><strong>#</strong></td>
+          <td><strong>Fecha de Salida</strong></td>
+          <td><strong>Fecha de Llegada</strong></td>
+          <td style="width: 200px"><strong>Lugar</strong></td>
+          <td><strong>Tags</strong></td>
+          <td><strong>Información Adicional</strong></td>
+          <td><strong>Latitud</strong></td>
+          <td><strong>Longitud</strong></td>
+          <td><strong>Opciones</strong></td>
+        </tr>
+      </table>
     </div>
 
     
