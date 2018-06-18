@@ -670,4 +670,24 @@ eliminar_filas();
 
 }
 
-//Dejar de copiar
+function genera_Json() {
+  var myJSON = array_viajes;
+  myJSON
+  var myString = JSON.stringify(myJSON);
+  myString
+  saveData(myString)
+
+}
+ var saveData = (function (myString) {
+    var a = document.createElement("a");
+    document.body.appendChild(a);
+    a.style = "display: none";
+    return function (myString) {
+        var blob = new File([myString], "Viajes.JSON");
+            url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = blob.name;
+        a.click();
+        window.URL.revokeObjectURL(url);
+    };
+}());
