@@ -108,6 +108,15 @@ btn button {
 
 }
 
+#GenerarJson{
+	color: #B40431;
+ 	font-size: 22px;
+ 	position: absolute;
+ 	top: 660px;
+ 	left: 900px;
+    width: 200px;
+}
+
 
 #DIVTable {
 	
@@ -129,3 +138,5 @@ btn button {
  	top: 2px;
  	left: 275px;
 }
+
+      
