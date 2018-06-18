@@ -163,8 +163,22 @@ function GuardarViaje(){
   var inputFechaLlegada = document.getElementById('llegadadate').value;
   var inputTags = document.getElementById('txtTags').value;
   var inputInfoAdicional = document.getElementById('txtInfoadicional').value;
-  var inputLugar = document.getElementById('pac-input').value="";
+  var inputLugar = document.getElementById('pac-input').value;
 
+  if (inputFechaSalida=="" || inputFechaLlegada==""){
+    alert("Debe seleccionar una fecha de salida y llegada");
+    return;
+  }
+  if (inputTags=="" || inputInfoAdicional=="" || inputLugar==""){
+    alert("Debe llenar todos los espacios correspondientes");
+    return;
+  }
+  var DateFechaSalida = new Date(inputFechaSalida);
+  var DateFechaLlegada = new Date(inputFechaLlegada);
+  if (DateFechaSalida>DateFechaLlegada){
+    alert("La Fecha de salida no puede ser mayor a la de llegada");
+    return;
+  }
   var viaje1 = new Object();
   viaje1.FechaSalida = inputFechaSalida;
   viaje1.FechaLlegada = inputFechaLlegada;
@@ -189,7 +203,8 @@ function GuardarViaje(){
   document.getElementById('txtInfoadicional').value="";
   document.getElementById('pac-input').value="";
 
-  
+  alert("El viaje ha sido agregado con exito.");
+  return;
 }
 
 function initMap(){
@@ -208,7 +223,6 @@ function initMap(){
         // Add marker
         addMarker({coords:event.latLng});
       });
-
       
       // Add marker
       var marker = new google.maps.Marker({
@@ -216,11 +230,9 @@ function initMap(){
         map:map,
         icon:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
       });
-
       var infoWindow = new google.maps.InfoWindow({
         content:'<h1>Lynn MA</h1>'
       });
-
       marker.addListener('click', function(){
         infoWindow.open(map, marker);
       });
@@ -239,7 +251,6 @@ function initMap(){
 
        /*flightPlanCoordinates.push(
         {lat:parseFloat(array_viajes[i].Latitud),lng:parseFloat(array_viajes[i].Longitud)}) 
-
       
       var flightPath = new google.maps.Polyline({
           path: flightPlanCoordinates,
@@ -307,7 +318,6 @@ function initMap(){
         // Add marker
         addMarker({coords:event.latLng});
       });
-
       
       // Add marker
       var marker = new google.maps.Marker({
@@ -315,11 +325,9 @@ function initMap(){
         map:map,
         icon:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
       });
-
       var infoWindow = new google.maps.InfoWindow({
         content:'<h1>Lynn MA</h1>'
       });
-
       marker.addListener('click', function(){
         infoWindow.open(map, marker);
       });
@@ -462,6 +470,18 @@ function FiltroTags(){
 }
 
 function FiltroFechas(){
+  var inputFechaSalida = new Date(document.getElementById("filtroSalidadate").value);
+  var inputFechaLlegada = new Date(document.getElementById("filtroLlegadadate").value);
+
+  if (inputFechaSalida=="Invalid Date" || inputFechaLlegada=="Invalid Date"){
+    alert("Debe seleccionar la fecha de salida y llegada");
+    return;
+  }
+
+  if (inputFechaSalida>inputFechaLlegada){
+    alert("La Fecha de salida no puede ser mayor a la de llegada");
+    return;
+  }
   var options = {
     zoom:13,
     center:{lat:9.933333,lng:-84.083333}
@@ -470,7 +490,6 @@ function FiltroFechas(){
   var map = new google.maps.Map(document.getElementById('map'), options);
   var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   var labelIndex = 0;
-
 
 
   // Array of markers
@@ -534,7 +553,6 @@ function diasTotales(){
   for (i=0;i<array_viajes.length;i++){
     if (array_viajes[i].FechaSalida<Fs)Fs=array_viajes[i].FechaSalida;
     if(array_viajes[i].FechaLlegada>Fl)Fl=array_viajes[i].FechaLlegada;
-    console.log(array_viajes[i].FechaSalida + "\n-------\n"+array_viajes[i].FechaLlegada);
 
 
   }
@@ -545,22 +563,6 @@ function diasTotales(){
 }
 
 function kmTotales(){
-  var kmT=0;
-  for (j = 0; j < array_distancias_kms.length; j++){
-    kmT+=array_distancias_kms[j];
-  }
-  return kmT;
-}
-
-
-function popupestads(){
-  diasTotales();
-  alert("Estadísticas" + "\n" + "Total de Viajes: " + array_viajes.length + "\n" +
-    "Total de Dias de Viaje: " +diasTotales()+ "\n" + "Total de Distancia: " +kmTotales()+ "\n" + "Cantidad de Ciudades Visitadas: " + array_ciudades.length
-    + "\n" + "Cantidad de Paises Visitados: " + array_paises.length);
-}
-
-function popupdistancias(){
   for (i = 0; i < array_viajes.length-1; i++) {
     var latitud1 = array_viajes[i].Latitud;
     var latitud2 = array_viajes[i+1].Latitud;
@@ -570,7 +572,35 @@ function popupdistancias(){
     var distancemts = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(latitud1, longitud1), new google.maps.LatLng(latitud2, longitud2));
     var distancekms = distancemts / 1000;
     array_distancias_kms.push(distancekms);
-    console.log(array_viajes.length);
+  }
+  var kmT=0;
+  for (j = 0; j < array_distancias_kms.length; j++){
+    kmT+=array_distancias_kms[j];
+  }
+  array_distancias_kms=[];
+  return kmT;
+}
+
+
+function popupestads(){
+  diasTotales();
+  
+  alert("Estadísticas" + "\n" + "Total de Viajes: " + array_viajes.length + "\n" +
+    "Total de Dias de Viaje: " +diasTotales()+ "\n" + "Total de Distancia: " +kmTotales()+ "\n" + "Cantidad de Ciudades Visitadas: " + array_ciudades.length
+    + "\n" + "Cantidad de Paises Visitados: " + array_paises.length);
+}
+
+function popupdistancias(){
+  
+  for (i = 0; i < array_viajes.length-1; i++) {
+    var latitud1 = array_viajes[i].Latitud;
+    var latitud2 = array_viajes[i+1].Latitud;
+    var longitud1 = array_viajes[i].Longitud;
+    var longitud2 = array_viajes[i+1].Longitud;
+    //var prueba_distancias = calcular_distancia(latitud1,longitud1,latitud2,longitud2);
+    var distancemts = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(latitud1, longitud1), new google.maps.LatLng(latitud2, longitud2));
+    var distancekms = distancemts / 1000;
+    array_distancias_kms.push(distancekms);
   }
 
   for (j = 0; j < array_distancias_kms.length; j++){
@@ -578,6 +608,7 @@ function popupdistancias(){
     alert("La Distancia entre el punto " + j + " y el punto " + x + " es de: " + array_distancias_kms[j]);
 
   }
+  array_distancias_kms=[];
 
 
 
@@ -606,15 +637,17 @@ eliminar_filas();
     var celda5 = row.insertCell(5);
     var celda6 = row.insertCell(6);
     var celda7 = row.insertCell(7);
+    var celda8 = row.insertCell(8);
 
     celda0.innerHTML = i+1;
     celda1.innerHTML = array_viajes[i].FechaSalida;
     celda2.innerHTML = array_viajes[i].FechaLlegada;
-    celda3.innerHTML = "<input type =='text' name = 'ta'value ='"+array_viajes[i].tags+"'</input>";
-    celda4.innerHTML = "<input type =='text' name = 'ia'value ='"+array_viajes[i].InfoAdicional+"'</input>";
-    celda5.innerHTML = array_viajes[i].Latitud;
-    celda6.innerHTML = array_viajes[i].Longitud;
-    celda7.innerHTML = '<button style="color:blue" class="editar" onclick="transformarEnEditable('+i+')">Editar</button>'
+    celda3.innerHTML = array_viajes[i].Lugar;
+    celda4.innerHTML = "<input type =='text' name = 'ta'value ='"+array_viajes[i].tags+"'</input>";
+    celda5.innerHTML = "<input type =='text' name = 'ia'value ='"+array_viajes[i].InfoAdicional+"'</input>";
+    celda6.innerHTML = array_viajes[i].Latitud;
+    celda7.innerHTML = array_viajes[i].Longitud;
+    celda8.innerHTML = '<button style="color:#B40431" font: "Century Gothic" class="Editar" onclick="transformarEnEditable('+i+')">Editar</button>'
 
   }
 }
@@ -631,6 +664,7 @@ eliminar_filas();
 
   array_viajes[numero].tags = document.getElementsByName("ta")[numero].value;
   array_viajes[numero].InfoAdicional = document.getElementsByName("ia")[numero].value;
+  initMap();
 
   alert("Se modifico  la informacion de la fila " +(numero+1) + " con exito");
 
